@@ -63,6 +63,8 @@
 // Support for an LED mode that lets one configure per-layer color maps
 #include "Kaleidoscope-Colormap.h"
 
+#include "Kaleidoscope-Heatmap.h"
+
 // Support for Keyboardio's internal keyboard testing mode
 #include "Kaleidoscope-HardwareTestMode.h"
 
@@ -270,10 +272,10 @@ KEYMAPS(
    ___, Key_Delete, ___, ___,
    ___,
 
-   Consumer_ScanPreviousTrack, Key_F6,                 Key_F7,                   Key_F8,                   Key_F9,          Key_F10,          Key_F11,
-   Consumer_PlaySlashPause,    Consumer_ScanNextTrack, Key_LeftCurlyBracket,     Key_RightCurlyBracket,    Key_LeftBracket, Key_RightBracket, Key_F12,
-                               Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,              Key_RightArrow,  ___,              ___,
-   Key_PcApplication,          Consumer_Mute,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, ___,             Key_Backslash,    Key_Pipe,
+   Consumer_ScanPreviousTrack, Key_F6,                 Key_F7,                   Key_F8,                   Key_F9,           Key_F10,       Key_F11,
+   Consumer_PlaySlashPause,    Consumer_ScanNextTrack, Key_RightCurlyBracket,    Key_Pipe,                 Key_RightBracket, Key_Backslash, Key_F12,
+                               Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,              Key_RightArrow,   ___,           ___,
+   Key_PcApplication,          Consumer_Mute,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, ___,              Key_Slash,     Key_Slash,
    ___, ___, Key_Enter, ___,
    ___)
 ) // KEYMAPS(
@@ -424,6 +426,15 @@ USE_MAGIC_COMBOS({.action = toggleKeyboardProtocol,
   .keys = { R3C6, R0C0, R0C6 }
 });
 
+static const cRGB heat_colors[] PROGMEM = {
+  {  0,   0,   0}, // black
+  {255,  25,  25}, // blue
+  {255, 255,  25}, // cyan
+  { 25, 255,  25}, // green
+  { 25, 255, 255}, // yellow
+  { 25,  25, 255}  // red
+};
+
 // First, tell Kaleidoscope which plugins you want to use.
 // The order can be important. For example, LED effects are
 // added in the order they're listed here.
@@ -468,12 +479,14 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // and slowly moves the rainbow across your keyboard
   LEDRainbowWaveEffect,
 
+  HeatmapEffect,
+
   // The chase effect follows the adventure of a blue pixel which chases a red pixel across
   // your keyboard. Spoiler: the blue pixel never catches the red pixel
-  LEDChaseEffect,
+  //LEDChaseEffect,
 
   // These static effects turn your keyboard's LEDs a variety of colors
-  solidRed, solidOrange, solidYellow, solidGreen, solidBlue, solidIndigo, solidViolet,
+  //solidRed, solidOrange, solidYellow, solidGreen, solidBlue, solidIndigo, solidViolet,
 
   // The breathe effect slowly pulses all of the LEDs on your keyboard
   LEDBreatheEffect,
@@ -549,7 +562,7 @@ void setup() {
   // We want to make sure that the firmware starts with LED effects off
   // This avoids over-taxing devices that don't have a lot of power to share
   // with USB devices
-  LEDOff.activate();
+  //LEDOff.activate();
 
   // To make the keymap editable without flashing new firmware, we store
   // additional layers in EEPROM. For now, we reserve space for five layers. If
@@ -562,6 +575,12 @@ void setup() {
   // maps for. To make things simple, we set it to five layers, which is how
   // many editable layers we have (see above).
   ColormapEffect.max_layers(5);
+
+  HeatmapEffect.heat_colors = heat_colors;
+  HeatmapEffect.heat_colors_length = 6;
+  HeatmapEffect.activate();
+
+  MouseKeys.speed = 100;
 }
 
 /** loop is the second of the standard Arduino sketch functions.
