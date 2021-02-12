@@ -91,7 +91,9 @@
   */
 
 enum { MACRO_VERSION_INFO,
-       MACRO_ANY
+       MACRO_ANY,
+       MACRO_MOUSE_SLOW,
+       MACRO_MOUSE_FAST
      };
 
 
@@ -265,11 +267,11 @@ KEYMAPS(
    ___),
 
   [FUNCTION] =  KEYMAP_STACKED
-  (___,      Key_F1,           Key_F2,      Key_F3,     Key_F4,        Key_F5,           Key_CapsLock,
-   Key_Tab,  ___,              Key_mouseUp, ___,        Key_mouseBtnR, Key_mouseWarpEnd, Key_mouseWarpNE,
-   Key_Home, Key_mouseL,       Key_mouseDn, Key_mouseR, Key_mouseBtnL, Key_mouseWarpNW,
-   Key_End,  Key_PrintScreen,  Key_Insert,  ___,        Key_mouseBtnM, Key_mouseWarpSW,  Key_mouseWarpSE,
-   ___, Key_Delete, ___, ___,
+  (___,      Key_F1,     Key_F2,      Key_F3,     Key_F4,        Key_F5, Key_CapsLock,
+   Key_Tab,  ___,        Key_mouseUp, ___,        Key_mouseBtnR, ___,    Key_Delete,
+   Key_Home, Key_mouseL, Key_mouseDn, Key_mouseR, Key_mouseBtnL, ___,
+   Key_End,  ___,        ___,         ___,        Key_mouseBtnM, ___,    ___,
+   ___, M(MACRO_MOUSE_SLOW), M(MACRO_MOUSE_FAST), ___,
    ___,
 
    Consumer_ScanPreviousTrack, Key_F6,                 Key_F7,                   Key_F8,                   Key_F9,           Key_F10,       Key_F11,
@@ -337,6 +339,14 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 
   case MACRO_ANY:
     anyKeyMacro(keyState);
+    break;
+
+  case MACRO_MOUSE_SLOW:
+    MouseKeys.speed = 10;
+    break;
+
+  case MACRO_MOUSE_FAST:
+    MouseKeys.speed = 100;
     break;
   }
   return MACRO_NONE;
