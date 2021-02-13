@@ -267,10 +267,10 @@ KEYMAPS(
    ___),
 
   [FUNCTION] =  KEYMAP_STACKED
-  (___,      Key_F1,     Key_F2,      Key_F3,     Key_F4,        Key_F5, Key_CapsLock,
-   Key_Tab,  ___,        Key_mouseUp, ___,        Key_mouseBtnR, ___,    Key_Delete,
-   Key_Home, Key_mouseL, Key_mouseDn, Key_mouseR, Key_mouseBtnL, ___,
-   Key_End,  ___,        ___,         ___,        Key_mouseBtnM, ___,    ___,
+  (___,               Key_F1,           Key_F2,      Key_F3,           Key_F4,        Key_F5, Key_CapsLock,
+   Key_Tab,           Key_mouseScrollL, Key_mouseUp, Key_mouseScrollR, Key_mouseBtnR, ___,    Key_Delete,
+   Key_mouseScrollDn, Key_mouseL      , Key_mouseDn, Key_mouseR,       Key_mouseBtnL, ___,
+   Key_mouseScrollUp, ___,              ___,         ___,              Key_mouseBtnM, ___,    ___,
    ___, M(MACRO_MOUSE_SLOW), M(MACRO_MOUSE_FAST), ___,
    ___,
 
@@ -342,7 +342,7 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
     break;
 
   case MACRO_MOUSE_SLOW:
-    MouseKeys.speed = 10;
+    MouseKeys.speed = 40;
     break;
 
   case MACRO_MOUSE_FAST:
@@ -483,7 +483,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
 
   // The rainbow effect changes the color of all of the keyboard's keys at the same time
   // running through all the colors of the rainbow.
-  LEDRainbowEffect,
+  //LEDRainbowEffect,
 
   // The rainbow wave effect lights up your keyboard with all the colors of a rainbow
   // and slowly moves the rainbow across your keyboard
@@ -499,14 +499,14 @@ KALEIDOSCOPE_INIT_PLUGINS(
   //solidRed, solidOrange, solidYellow, solidGreen, solidBlue, solidIndigo, solidViolet,
 
   // The breathe effect slowly pulses all of the LEDs on your keyboard
-  LEDBreatheEffect,
+  //LEDBreatheEffect,
 
   // The AlphaSquare effect prints each character you type, using your
   // keyboard's LEDs as a display
-  AlphaSquareEffect,
+  //AlphaSquareEffect,
 
   // The stalker effect lights up the keys you've pressed recently
-  StalkerEffect,
+  //StalkerEffect,
 
   // The LED Palette Theme plugin provides a shared palette for other plugins,
   // like Colormap below
