@@ -65,6 +65,8 @@
 
 #include "Kaleidoscope-Heatmap.h"
 
+#include "Kaleidoscope-LED-Wavepool.h"
+
 // Support for Keyboardio's internal keyboard testing mode
 #include "Kaleidoscope-HardwareTestMode.h"
 
@@ -229,10 +231,10 @@ KEYMAPS(
 #elif defined (PRIMARY_KEYMAP_CUSTOM)
   // Edit this keymap to make a custom layout
   [PRIMARY] = KEYMAP_STACKED
-  (___,             Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext,
-   Key_Tab,         Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Backspace,
-   Key_LeftControl, Key_A, Key_S, Key_D, Key_F, Key_G,
-   Key_LeftShift,   Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
+  (Key_LEDEffectNext, Key_1, Key_2, Key_3, Key_4, Key_5, Key_CapsLock,
+   Key_Tab,           Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Backspace,
+   Key_LeftControl,   Key_A, Key_S, Key_D, Key_F, Key_G,
+   Key_LeftShift,     Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
    Key_Lang2, Key_Spacebar, Key_LeftGui, Key_LeftShift,
    ShiftToLayer(FUNCTION),
 
@@ -267,7 +269,7 @@ KEYMAPS(
    ___),
 
   [FUNCTION] =  KEYMAP_STACKED
-  (___,               Key_F1,           Key_F2,      Key_F3,           Key_F4,        Key_F5, Key_CapsLock,
+  (___,               Key_F1,           Key_F2,      Key_F3,           Key_F4,        Key_F5, ___,
    Key_Tab,           Key_mouseScrollL, Key_mouseUp, Key_mouseScrollR, Key_mouseBtnR, ___,    Key_Delete,
    Key_mouseScrollDn, Key_mouseL      , Key_mouseDn, Key_mouseR,       Key_mouseBtnL, ___,
    Key_mouseScrollUp, ___,              ___,         ___,              Key_mouseBtnM, ___,    ___,
@@ -379,6 +381,7 @@ void toggleLedsOnSuspendResume(kaleidoscope::plugin::HostPowerManagement::Event 
     LEDControl.enable();
     break;
   case kaleidoscope::plugin::HostPowerManagement::Sleep:
+    LEDControl.disable();
     break;
   }
 }
@@ -438,11 +441,11 @@ USE_MAGIC_COMBOS({.action = toggleKeyboardProtocol,
 
 static const cRGB heat_colors[] PROGMEM = {
   {  0,   0,   0}, // black
-  {255,  25,  25}, // blue
-  {255, 255,  25}, // cyan
-  { 25, 255,  25}, // green
-  { 25, 255, 255}, // yellow
-  { 25,  25, 255}  // red
+  {200,  25,  25}, // blue
+  {160, 160,  25}, // cyan
+  { 25, 200,  25}, // green
+  { 25, 160, 160}, // yellow
+  { 25,  25, 200}  // red
 };
 
 // First, tell Kaleidoscope which plugins you want to use.
@@ -490,6 +493,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
   LEDRainbowWaveEffect,
 
   HeatmapEffect,
+
+  WavepoolEffect,
 
   // The chase effect follows the adventure of a blue pixel which chases a red pixel across
   // your keyboard. Spoiler: the blue pixel never catches the red pixel
