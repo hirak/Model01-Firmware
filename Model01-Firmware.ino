@@ -242,7 +242,7 @@ KEYMAPS(
    Key_International3, Key_Y, Key_U, Key_I,     Key_O,      Key_P,         Key_LeftBracket,
                        Key_H, Key_J, Key_K,     Key_L,      Key_Semicolon, Key_Quote,
    Key_Equals,         Key_N, Key_M, Key_Comma, Key_Period, Key_Slash,     Key_International1,
-   Key_RightAlt, Key_Enter, Key_Spacebar, Key_Lang1,
+   Key_RightAlt, Key_Enter, Key_Enter, Key_Lang1,
    ShiftToLayer(FUNCTION)),
 
 #else
@@ -254,11 +254,11 @@ KEYMAPS(
 
 
   [NUMPAD] =  KEYMAP_STACKED
-  (___, ___, ___, ___, ___, ___, ___,
-   ___, ___, ___, ___, ___, ___, ___,
-   ___, ___, ___, ___, ___, ___,
-   ___, ___, ___, ___, ___, ___, ___,
-   ___, ___, ___, ___,
+  (___,               ___,              ___,         ___,              ___,           ___, ___,
+   Key_Tab,           Key_mouseScrollL, Key_mouseUp, Key_mouseScrollR, Key_mouseBtnR, ___, ___,
+   Key_mouseScrollDn, Key_mouseL      , Key_mouseDn, Key_mouseR,       Key_mouseBtnL, ___,
+   Key_mouseScrollUp, ___,              ___,         ___,              Key_mouseBtnM, ___, ___,
+   ___, M(MACRO_MOUSE_SLOW), M(MACRO_MOUSE_FAST), ___,
    ___,
 
    ___, ___, Key_7, Key_8,      Key_9,              Key_KeypadSubtract, M(MACRO_VERSION_INFO),
@@ -269,18 +269,18 @@ KEYMAPS(
    ___),
 
   [FUNCTION] =  KEYMAP_STACKED
-  (___,               Key_F1,           Key_F2,      Key_F3,           Key_F4,        Key_F5, ___,
-   Key_Tab,           Key_mouseScrollL, Key_mouseUp, Key_mouseScrollR, Key_mouseBtnR, ___,    Key_Delete,
-   Key_mouseScrollDn, Key_mouseL      , Key_mouseDn, Key_mouseR,       Key_mouseBtnL, ___,
-   Key_mouseScrollUp, ___,              ___,         ___,              Key_mouseBtnM, ___,    ___,
-   ___, M(MACRO_MOUSE_SLOW), M(MACRO_MOUSE_FAST), ___,
+  (___, Key_F1, Key_F2, Key_F3, Key_F4, Key_F5, ___,
+   ___, ___,    ___,    ___,    ___,    ___,    Key_Delete,
+   ___, ___,    ___,    ___,    ___,    ___,
+   ___, ___,    ___,    ___,    ___,    ___,    ___,
+   ___, ___,    ___,    ___,
    ___,
 
    ___,       Key_F6,         Key_F7,                   Key_F8,                   Key_F9,           Key_F10,       Key_F11,
    ___,       Consumer_Eject, Key_RightCurlyBracket,    Key_Pipe,                 Key_RightBracket, Key_Backslash, Key_F12,
               Key_LeftArrow,  Key_DownArrow,            Key_UpArrow,              Key_RightArrow,   ___,           ___,
    Key_Minus, Consumer_Mute,  Consumer_VolumeDecrement, Consumer_VolumeIncrement, ___,              Key_Slash,     Key_Slash,
-   ___, ___, Key_Enter, ___,
+   ___, ___,  Key_Enter, ___,
    ___)
 ) // KEYMAPS(
 
